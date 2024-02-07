@@ -112,4 +112,21 @@ public class ProductRepositoryTest {
         assertEquals(product2.getProductId(),savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void negativeDeleteTest(){
+        Product newProduct = new Product();
+        newProduct.setProductName("ada");
+        newProduct.setProductQuantity(10);
+        productRepository.create(newProduct);
+
+        Product testProduct = new Product();
+        testProduct.setProductName("tidak ada");
+        testProduct.setProductQuantity(1);
+        productRepository.delete(testProduct.getProductId());
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        productIterator.next();
+        assertFalse(productIterator.hasNext());
+    }
 }
