@@ -40,4 +40,17 @@ public class ProductController {
         model.addAttribute("products",allProducts);
         return "productList";
     }
+    @GetMapping("/edit/{productId}")
+    public String editProductPage(@PathVariable String productId, Model model) {
+        Product product = service.findById(productId);
+        model.addAttribute("product", product);
+        return "editProduct";
+    }
+    @PostMapping("/edit")
+    public String editProductPost(@RequestParam String productId,@RequestParam String newName,@RequestParam int newQuantity){
+        Product product = service.findById(productId);
+        product.setProductName(newName);
+        product.setProductQuantity(newQuantity);
+        return "redirect:/product/list";
+    }
 }
