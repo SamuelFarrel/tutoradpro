@@ -30,6 +30,9 @@
                 <form th:action="@{'/product/edit/' + ${product.productId}}" method="get" style="display: inline;">
                     <button type="submit" class="btn btn-primary btn-sm ml-2">Edit</button>
                 </form>
+                <form th:action="@{'/product/delete/' + ${product.productId}}" method="post">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
             </td>
         </tr>
         </tbody>
