@@ -44,7 +44,6 @@ class CreatePageFunctionalTest {
             quantityInput.sendKeys("25");
             submitButton.click();
 
-            Thread.sleep(1000);
             driver.get(baseUrl + "/product/list");
             WebElement table = driver.findElement(By.tagName("table"));
             List<WebElement> rows = table.findElements(By.tagName("tr"));
