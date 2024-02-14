@@ -81,3 +81,11 @@ tasks.jacocoTestReport{
         xml.required = true
     }
 }
+
+sonar {
+    properties {
+        property("sonar.projectKey", "SamuelFarrel_tutoradpro")
+        property("sonar.organization", "samuelfarrel")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
