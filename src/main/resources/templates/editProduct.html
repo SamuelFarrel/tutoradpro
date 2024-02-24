@@ -14,11 +14,11 @@
         <input type="hidden" name="productId" th:value="${product.productId}" />
         <div class="form-group">
             <label for="nameInput">Name</label>
-            <input name="newName" th:value="${product.productName}" type="text" class="form-control mb-4 col-4" id="nameInput" placeholder="Enter product name">
+            <input name="newName" th:field="*{product.productName}" th:value="${product.productName}" type="text" class="form-control mb-4 col-4" id="nameInput" placeholder="Enter product name">
         </div>
         <div class="form-group">
             <label for="quantityInput">Quantity</label>
-            <input name="newQuantity" th:value="${product.productQuantity}" type="text" class="form-control mb-4 col-4" id="quantityInput" placeholder="Enter product quantity">
+            <input name="newQuantity" th:field="*{product.productQuantity}" th:value="${product.productQuantity}" type="text" class="form-control mb-4 col-4" id="quantityInput" placeholder="Enter product quantity">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
