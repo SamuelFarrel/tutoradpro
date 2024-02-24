@@ -156,4 +156,34 @@ Kode bisa di*improve* dengan menggabungkan test tersebut pada satu file dan meng
 Menurut saya, kode saya telah memenuhi kriteria CI dan CD. Pada project saya, telah diimplementasikan beberapa workflows yaitu `scorecard.yml`,`sonarcloud.yml`, dan `ci.yml` yang akan dijalankan (secara otomatis) pada Github Actions setiap kali terjadi suatu push atau pull request pada branch, sehingga hal tersebut sudah memenuhi konsep CI (_Continuous Integration_). Selain itu, saya juga menggunakan platform Koyeb untuk mendeploy web saya, dan deployment tersebut akan berlangsung secara otomatis setiap ada push atau pull request pada branch sehingga project saya juga sudah memenuhi kriteria CD (_Continuous Deployment_).
     
 </details>
+
+<details>
+<summary> Tutorial 3 </summary>
+
+## Prinsip Solid yang saya gunakan pada project saya
+- **Single Responsibility Principle (SRP)**
+
+    Saya memisahkan class `CarController` dengan class `ProductController` menjadi dua file yang berbeda karena masing-masing class memiliki tanggung jawab yang berbeda. `CarController` berfungsi untuk mengatur endpoint untuk Car related (`/car`) dan `ProductController` untuk endpoint Product related (`/product`), dengan begitu saya tidak melanggar prinsip SRP dan mencegah adanya endpoint yang tidak diinginkan karena terdapat dua class controller yang berbeda responsibilty pada satu file yang sama.
+
+- **Open-Closed Principle (OCP)**
+
+    Untuk prinsip ini, saya sedikit merubah cara bekerja dari repository Car dan Product. Agar `Repository` hanya _open for extension_ dan tetap _closed for modification_, `Repository` saya ubah menjadi interface `RepositoryInterface`. Lalu akan terdapat dua class yang akan implement interface tersebut yaitu `CarRepository` untuk tipe object `Car` dan `ProductRepository` untuk tipe object `Product`. Saya juga mengupdate beberapa test, controller, dan service implementation agar bekerja sesuai dengan repository yang telah diupdate.
+
+- **Dependency Inversions Principle (DIP)**
+    
+    Untuk memenuhi prinsip DIP, saya hanya melakukan perubahan minor pada controller dan service implementations dari project saya. Pada dasarnya semua file akan menggunakan interface asli instead of implementasinya (depending on interface or abstarct functions and classes). Pada `CarController` saya mengubah tipe `carservice` yang digunakan untuk memanggil function edit,delete,add, dan lainnya dari `CarServiceImpl` menjadi `CarService` saja. Selanjutnya, pada file `CarServiceImpl` tipe dari variabel `carRepository` diubah menjadi menggunakan `RepsitoryInterface<Car>` instead of `CarRepository`. Begitu juga dengan `ProductServiceImpl`
+
+
+## Kelebihan mengaplikasikan prinsip SOLID pada project
+- Meningkatkan maintainability dan readability dari class-class pada project karena tiap class memiliki tanggung jawabnya masing-masing sehingga mudah untuk dipahami, terutama bagi orang lain yang bukan merupakan owner project (**contoh**: pemisahan controller yang mengatur Car related (`/car`) dan yang mengatur Product related (`/Product`))
+- Mengurangi kemungkinan untuk terjadi error karena penambahan kode dapat dilakukan tanpa merubah kode yang sudah ada dan berjalan dengan lancar (**contoh**: jika kita ingin buat satu object baru, misalnya bernama `Item`, kita hanya perlu menambahkan repository implementation baru `ItemRepository`, tanpa merubah kode repository lain yang sudah ada dan berjalan dengan lancar)
+- Memudahkan testing (meningkatkan testability) karena high-level modules bergantung pada abstraksi dibandingkan concrete class (**contoh**: `CarServiceImpl` yang bergantung pada `RepositoryInterface` mempermudah testing project)
+
+## Kekurangan tidak menggunakan prinsip SOLID pada project
+- Modifikasi atau penambahan fitur pada project dapat menimbulkan error atau bug baru pada aplikasi (**contoh**: kita ingin mengubah fitur delete pada Car saja, tetapi kita harus mengubah kode pada class repository yang sudah berjalan dengan benar)
+- Kode dan class pada project menjadi kompleks sehingga sulit untuk dimengerti dan dikelola karena tiap class belum tentu hanya memiliki satu tujuan/tanggung jawab (**contoh**: Pada `before-solid`, `ProductController` memiliki fungsi untuk mengatur endpoint untuk Product dan Car yang dapat membingungkan pembaca kode karena tidak ada alasan yang jelas juga untuk penggabungan dua class yang berbeda tujuan dalam satu file yang sama)
+- Kode menjadi kurang fleksibel untuk dirubah karena high-level modules masih bergantung pada concrete class karena perubahan pada low-level modules dapat mengakibatkan perubahan pada high-level modules juga (**contoh**: jika kita tidak menerapkan DIP, perubahan pada `CarRepository` dapat membuat kita melakukan perubahan pada `CarServiceImpl` juga)
+
+
+</details>
     
