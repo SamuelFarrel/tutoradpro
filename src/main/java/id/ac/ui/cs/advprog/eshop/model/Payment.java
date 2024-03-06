@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import enums.PaymentMethod;
 import enums.PaymentStatus;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,12 +42,12 @@ public class Payment {
 
     public Payment(String id,String method,Map<String,String> paymentData){
         this(id, paymentData);
-        this.method = method;
-        if(method.equals("BANK")){
+        setPaymentMethod(method);
+        if(method.equals(PaymentMethod.BANK.getValue())){
             if(containsNullOrEmptyValues(paymentData)){
                 throw new IllegalArgumentException();
             }
-        } else if(method.equals("VOUCHER") && (containsNullOrEmptyValues(paymentData)||
+        } else if(method.equals(PaymentMethod.VOUCHER.getValue()) && (containsNullOrEmptyValues(paymentData)||
             !checkVoucherValid(paymentData.get("voucherCode")))){
                 throw new IllegalArgumentException();
         }
@@ -65,6 +66,14 @@ public class Payment {
     public void setStatus(String status){
         if(PaymentStatus.contains(status)){
             this.status = status;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void setPaymentMethod(String method){
+        if(PaymentMethod.contains(method)){
+            this.method = method;
         } else {
             throw new IllegalArgumentException();
         }
