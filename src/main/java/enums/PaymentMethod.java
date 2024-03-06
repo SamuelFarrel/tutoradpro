@@ -3,19 +3,19 @@ package enums;
 import lombok.Getter;
 
 @Getter
-public enum PaymentStatus {
-    FAILED("FAILED"),
-    SUCCESS("SUCCESS");
+public enum PaymentMethod {
+    BANK("BANK"),
+    VOUCHER("VOUCHER");
 
     private final String value;
 
-    private PaymentStatus(String value){
+    private PaymentMethod(String value){
         this.value = value;
     }
 
     public static boolean contains(String param){
-        for(PaymentStatus paymentStatus:PaymentStatus.values()){
-            if(paymentStatus.name().equals(param)){
+        for(PaymentMethod paymentMethod:PaymentMethod.values()){
+            if(paymentMethod.name().equals(param)){
                 return true;
             }
         }
