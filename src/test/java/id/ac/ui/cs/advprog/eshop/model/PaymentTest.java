@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import enums.PaymentStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,7 @@ public class PaymentTest {
         paymentData.put("Test","Correct");
         String id = "20";
         String method = "BANK";
-        String status = "SUCCESS";
+        String status = PaymentStatus.SUCCESS.getValue();
 
         Payment payment = new Payment(id,method,status,paymentData);
 
@@ -107,15 +108,15 @@ public class PaymentTest {
     @Test
     void testSetStatusCorrect(){
         Map<String,String> paymentData = testCaseBank.get(1);
-        Payment payment = new Payment("1","BANK","FAILED",new HashMap<>());
-        payment.setStatus("SUCCESS");
-        assertEquals("SUCCESS",payment.getStatus());
+        Payment payment = new Payment("1","BANK",PaymentStatus.FAILED.getValue(),new HashMap<>());
+        payment.setStatus(PaymentStatus.SUCCESS.getValue());
+        assertEquals(PaymentStatus.SUCCESS.getValue(),payment.getStatus());
     }
 
     @Test
     void testSetStatusInvalid(){
         Map<String,String> paymentData = testCaseBank.get(1);
-        Payment payment = new Payment("1","BANK","FAILED",new HashMap<>());
+        Payment payment = new Payment("1","BANK",PaymentStatus.FAILED.getValue(),new HashMap<>());
         assertThrows(IllegalArgumentException.class, () -> payment.setStatus("HELLO"));
     }
 }
