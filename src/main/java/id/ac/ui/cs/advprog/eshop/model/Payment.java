@@ -23,11 +23,13 @@ public class Payment {
         if (myMap == null) {
             return true;
         }
-        if (myMap.containsKey("")||myMap.containsKey(null)){
+        if (myMap.containsKey("")){
             return true;
         }
-        if(myMap.containsValue("")||myMap.containsValue(null)){
-            return true;
+        for (String value : myMap.values()) {
+            if (value == null || value.isEmpty() || value.equals("")) {
+                return true;
+            }
         }
         return false;
     }
