@@ -4,6 +4,7 @@ import id.ac.ui.cs.advprog.eshop.model.Payment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,9 @@ class PaymentRepositoryTest {
 
     @BeforeEach
     public void setUp() {
+        paymentRepository = new PaymentRepository();
+        payments = new ArrayList<>();
+
         Map<String,String> paymentDataBank = new HashMap<>();
         Map<String,String> paymentDataVoucher = new HashMap<>();
         paymentDataBank.put("bankName","Bank Test");
