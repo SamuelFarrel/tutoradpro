@@ -17,7 +17,7 @@ public class PaymentTest {
     @BeforeEach
     void setUp(){
         Map<String,String> voucherCorrect = new HashMap<>();
-        voucherCorrect.put("voucherCode","ESHOP12345678TESTS");
+        voucherCorrect.put("voucherCode","ESHOP12345678TES");
         testCaseVoucher.add(voucherCorrect);
         Map<String,String> voucherIncorrect = new HashMap<>();
         voucherIncorrect.put("voucherCode","ESHOP1234A678TESTS");
@@ -28,6 +28,7 @@ public class PaymentTest {
         bankCorrect.put("referenceCode","90807010");
         testCaseBank.add(bankCorrect);
         Map<String,String> bankIncorrect = new HashMap<>();
+        bankIncorrect.put("bankName","");
         testCaseBank.add(bankIncorrect);
     }
 
@@ -51,7 +52,7 @@ public class PaymentTest {
     @Test
     void testCreateNullValuePaymentData(){
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("1",new HashMap<>());
+            Payment payment = new Payment("1",null);
         });
     }
 
@@ -68,7 +69,7 @@ public class PaymentTest {
     void testValidVoucher(){
         Map<String,String> paymentData = testCaseVoucher.get(0);
         Payment payment = new Payment("1","VOUCHER",paymentData);
-        assertEquals("ESHOP12345678TESTS",payment.getPaymentData().get("voucherCode"));
+        assertEquals("ESHOP12345678TES",payment.getPaymentData().get("voucherCode"));
     }
 
     @Test
@@ -91,7 +92,7 @@ public class PaymentTest {
     void testInvalidBank(){
         Map<String,String> paymentData = testCaseBank.get(1);
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("1","BANK",new HashMap<>());
+            Payment payment = new Payment("1","BANK",paymentData);
         });
     }
 
