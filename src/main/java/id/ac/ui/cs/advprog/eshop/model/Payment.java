@@ -1,15 +1,13 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import enums.PaymentStatus;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-import java.util.Arrays;
 import java.util.Map;
 
 @Builder
 @Getter
-@Setter
 public class Payment {
     String id;
     String status;
@@ -36,12 +34,7 @@ public class Payment {
 
     public Payment(String id,String method,String status,Map<String,String> paymentData){
         this(id, method, paymentData);
-        String[] statusList = {"FAILED","SUCCESS"};
-        if(Arrays.stream(statusList).noneMatch(item -> (item.equals(status)))){
-            throw new IllegalArgumentException();
-        } else {
-            this.status = status;
-        }
+        setStatus(status);
     }
 
     public Payment(String id,String method,Map<String,String> paymentData){
@@ -68,11 +61,10 @@ public class Payment {
     }
 
     public void setStatus(String status){
-        String[] statusList = {"FAILED","SUCCESS"};
-        if(Arrays.stream(statusList).noneMatch(item -> (item.equals(status)))){
-            throw new IllegalArgumentException();
-        } else {
+        if(PaymentStatus.contains(status)){
             this.status = status;
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
