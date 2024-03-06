@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
+import enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,8 +27,10 @@ class PaymentRepositoryTest {
         paymentDataBank.put("bankName","Bank Test");
         paymentDataBank.put("referenceCode","90807010");
         paymentDataVoucher.put("voucherCode","ESHOP12345678TES");
-        Payment payment1 = new Payment("1", "BANK", paymentDataBank);
-        Payment payment2 = new Payment("2", "VOUCHER", paymentDataVoucher);
+        Payment payment1 = new Payment("1", PaymentMethod.BANK.getValue(),
+                paymentDataBank);
+        Payment payment2 = new Payment("2", PaymentMethod.VOUCHER.getValue(),
+                paymentDataVoucher);
         payments.add(payment1); payments.add(payment2);
     }
 
@@ -53,7 +56,8 @@ class PaymentRepositoryTest {
         Map<String,String> paymentData = new HashMap<>();
         paymentData.put("bankName","Bank Test");
         paymentData.put("referenceCode","90807010");
-        Payment paymentUpdate = new Payment(payment.getId(),"BANK",paymentData);
+        Payment paymentUpdate = new Payment(payment.getId(),PaymentMethod.BANK.getValue()
+                ,paymentData);
         paymentRepository.save(paymentUpdate);
         Payment compareUpdate = paymentRepository.findById(payment.getId());
         assertEquals(paymentUpdate.getId(),compareUpdate.getId());
