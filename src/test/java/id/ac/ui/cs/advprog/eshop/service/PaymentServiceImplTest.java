@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.service;
 
+import enums.PaymentMethod;
 import enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
@@ -50,10 +51,10 @@ class PaymentServiceImplTest {
         Map<String,String> paymentDataBank = Map.of("bankName", "Bank Test",
                 "referenceCode", "90807010");
         Payment payment1 = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
-                "BANK", paymentDataBank);
+                PaymentMethod.BANK.getValue(), paymentDataBank);
         Map<String,String> paymentDataVoucher = Map.of("voucherCode", "ESHOP12345678TES");
         Payment payment2 = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
-                "VOUCHER", paymentDataVoucher);
+                PaymentMethod.VOUCHER.getValue(), paymentDataVoucher);
         payments = new ArrayList<>();
         payments.add(payment1); payments.add(payment2);
     }
@@ -64,7 +65,7 @@ class PaymentServiceImplTest {
         Order order = orders.get(0);
         doReturn(payment).when(paymentRepository).save(any(Payment.class));
 
-        String method = "BANK";
+        String method = PaymentMethod.BANK.getValue();
         Map<String,String> paymentDetails = Map.of("bankName", "Bank Test",
                 "referenceCode", "90807010");
         Payment result = paymentService.addPayment(order, method, paymentDetails);
