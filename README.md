@@ -186,4 +186,15 @@ Menurut saya, kode saya telah memenuhi kriteria CI dan CD. Pada project saya, te
 
 
 </details>
+
+
+<details>
+<summary> Tutorial 4 </summary>
     
+## Apakah TTD Flow Berguna Bagi Saya?
+Menurut pengalaman saya dalam mengerjakan tutorial ke-4 ini, penggunaan TTD Flow cukup berguna untuk membuat fitur dengan fungsionalitas yang lebih pasti dan lebih mudah untuk dilakukan perubahan sehingga mudah untuk perawatannya. Tetapi, menurut saya pribadi, menggunakan flow ini masih cukup sulit karena saya tidak biasa membuat fitur dimulai dari test terlebih dahulu, saya biasanya membuat classnya terlebih dahulu baru membuat test berdasarkan class tersebut dan method di dalamnya. Walaupun begitu, menurut saya TTD Flow ini merupakan _practice_ yang baik dalam development sehingga saya akan mulai membiasakan diri dengan flow ini untuk kemudahan ke depannya. Menggunakan flow ini memang sulit saat awal, tetapi mempermudah developer untuk perawatan aplikasi ke depannya (hal yang sama saya rasakan saat memperbaiki beberapa bagian kode).
+
+## Keberhasilan Menerapkan Prinsip **F.I.R.S.T**
+Berdasarkan _unit test_ yang telah saya buat dan jalankan (hijau), menurut saya prinsip FIRST telah diterapkan dengan baik pada test di program saya. Tes berjalan dengan cepat dan memberikan hasil yang instan sesuai dengan prinsip **F**ast. Satu tes tidak mempengeruhi tes lainnya sehingga semua tes bersifat independen memenuhi prinsip **I**ndependent. Tes juga tetap memberikan hasil yang konsisten saat dijalankan secara berulang, berarti memenuhi prinsip **R**epeatable. Tes juga divalidasi secara otomatis dan langsung mereturn hasil berhasil atau gagal dengan method-method `assert` sehingga memenuhi prinsip **S**elf validating. Terkahir, tes saya juga diterapkan tepat waktu yaitu sebelum pengembangan class dimulai karena mengikuti flow TTD, yang berarti tes saya tepat waktu dibuatnya untuk mengantisipasi masalah dalam pengembangan, memenuhi prinsip **T**imely. 
+
+</details>
